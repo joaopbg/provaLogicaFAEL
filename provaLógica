@@ -1,0 +1,116 @@
+Algoritmo "semnome"
+// Data atual  : 10/04/2022
+// Ler o nome e conribuição dos países com UE
+// dizer qual as 5 maiores contribuicoes
+// falar a contribuicao e gasto do reino unido.
+
+// atenção professor versao do visualG 3.0.7.0
+Tipo
+    pais = registro
+         nome : Caracter
+         contribuicao : real
+    fimregistro
+Var
+// Seção de Declarações das variáveis
+
+paises: vetor[1..15] de pais
+paisTemp: pais
+indicePais,indiceTemp: inteiro
+menu,i,x: inteiro
+resposta: caractere
+
+Inicio
+// Seção de Comandos, procedimento, funções, operadores, etc...
+
+escreval("Bem vindo!")
+indicePais <- 1
+enquanto menu = 0 faca
+   escreval("1 - Cadastrar um pais e sua contribuicao")
+   escreval("2 - Ver as 5 maiores contribuicoes")
+   escreval("3 - Verificar o valor da contribuicao do reino unido com Ue e gasto da Ue com Reindo unido")
+   escreval("Para sair pressione entre com qualquer valor diferente do menu")
+   escreval(" ")
+   leia(menu)
+
+   se menu = 1 entao
+      escreval("Insira o nome do pais: ")
+      leia(paises[indicePais].nome)
+      escreval("Insira a contribuição deste pais com a UE: ")
+      leia(paises[indicePais].contribuicao)
+      escreval(paises[indicePais].nome,paises[indicePais].contribuicao)
+      indicePais <- indicePais + 1
+      escreval("retornar ao menu?(s/n)")
+      leia(resposta)
+      se resposta = "s" entao
+         menu <- 0
+      senao
+           menu <- 9
+      fimse
+   senao
+        se menu = 2 entao
+           se indicePais = 1 entao
+              escreval("Nao há nenhum pais cadastrado")
+           senao
+
+              escreval("As 5 maiores contribuicoes sao: ")
+              para x<-1 ate indicePais faca
+                   para i<-x+1 ate indicePais faca
+                        se paises[x].contribuicao < paises[i].contribuicao entao
+                           paisTemp.nome <- paises[x].nome
+                           paisTemp.contribuicao <- paises[x].contribuicao
+
+                           paises[x].nome<- paises[i].nome
+                           paises[x].contribuicao <- paises[i].contribuicao
+
+                           paises[i].nome<- paisTemp.nome
+                           paises[i].contribuicao <- paisTemp.contribuicao
+                        fimse
+                   fimpara
+              fimpara
+              //filtro de erro
+              se indicePais > 5 entao
+                 indiceTemp <- indicePais
+                 indicePais <- 5
+              senao
+                   indiceTemp <- indicePais
+              fimse
+              para x<-1 ate indicePais faca
+                   escreval(paises[x].nome)
+                   escreval(paises[x].contribuicao)
+              fimpara
+              //corrigir o marcador do tamanho do vetor
+              indicePais <- indiceTemp
+           fimse
+           escreval("retornar ao menu?(s/n)")
+           leia(resposta)
+           se resposta = "s" entao
+              menu <- 0
+           senao
+                menu <- 9
+           fimse
+        senao
+             se menu = 3 entao
+                escreval("A contribuicao do Reino Unido com a UE e de: ")
+                para i<-1 ate indicePais faca
+                     se paises[i].nome = "reino unido" entao
+                        escreval("Contribuicao do reino unido: ")
+                        escreval(paises[i].contribuicao)
+                        escreval("Contribuicao da Ue: 6,9bilhoes")
+                        escreval(i)
+                     fimse
+                fimpara
+                menu <- 0
+                senao
+                     escreval("Deseja realmente sair?(s/n)")
+                     leia(resposta)
+                     se resposta = "n" entao
+                        menu<-0
+                     senao
+                          menu<-4
+                     fimse
+             fimse
+        fimse
+   fimse
+fimenquanto
+
+Fimalgoritmo
